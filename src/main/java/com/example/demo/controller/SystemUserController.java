@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.factory.SysUserDaoFactory;
 import com.example.demo.entity.SysUser;
 import com.example.demo.service.factory.SysUserServiceFactory;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -13,6 +12,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class SystemUserController {
     private SysUserServiceFactory sysUserServiceFactory;
+    private SysUserDaoFactory sysUserDaoFactory;
 
     @GetMapping("/type/{type}")
     public SysUser get(@PathVariable String type) {
@@ -22,5 +22,10 @@ public class SystemUserController {
     @GetMapping("/type/{type}")
     public SysUser get(@PathVariable String type, Map<String, Object> map) {
         return sysUserServiceFactory.get(type, map);
+    }
+
+    @PostMapping("type")
+    public Map<String, Object> get2(@RequestParam @RequestBody Map<String, Object> map) {
+        return map;
     }
 }
